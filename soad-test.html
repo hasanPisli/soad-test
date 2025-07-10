@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SOD Ad Preview</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .ad-container {
+      margin: 30px auto;
+      border: 2px dashed #aaa;
+      padding: 15px;
+      background: #fff;
+      max-width: 1000px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .ad-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    /* Desktop Ads */
+    .ad-skin {
+      height: 250px;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920') center/cover no-repeat;
+    }
+
+    .ad-scroller {
+      width: 900px;
+      height: 450px;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=900&h=450') center/cover no-repeat;
+    }
+
+    .ad-expand-scroller {
+      width: 900px;
+      height: 250px;
+      background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=900&h=250') center/cover no-repeat;
+      margin-bottom: 10px;
+    }
+
+    .ad-expand-scroller.expanded {
+      height: 450px;
+      background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=900&h=450') center/cover no-repeat;
+    }
+
+    .ad-billboard {
+      width: 970px;
+      height: 250px;
+      background: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=970&h=250') center/cover no-repeat;
+    }
+
+    .ad-halfpage {
+      width: 300px;
+      height: 800px;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=300&h=800') center/cover no-repeat;
+    }
+
+    .ad-footer {
+      width: 100%;
+      height: 170px;
+      background: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1920&h=170') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    }
+
+    .ad-footer.expanded {
+      height: 485px;
+      background: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1920&h=485') center/cover no-repeat;
+    }
+
+    .ad-gluey {
+      width: 100%;
+      height: 1080px;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1920&h=1080') center/cover no-repeat;
+    }
+
+    /* Mobile Ads preview inside phone frame */
+    .phone {
+      width: 360px;
+      margin: 20px auto;
+      border: 12px solid #333;
+      border-radius: 40px;
+      background: #000;
+      position: relative;
+    }
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 5px;
+      border-radius: 5px;
+      background: #333;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 640px;
+      background: #fff;
+      overflow-y: auto;
+    }
+
+    .mobile-ad {
+      width: 100%;
+      text-align: center;
+      margin: 15px 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .mobile-skin { 
+      height: 100px; 
+      background-image: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=360&h=100');
+    }
+    
+    .mobile-scroller { 
+      height: 150px; 
+      background-image: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=360&h=150');
+    }
+    
+    .mobile-expand-scroller {
+      height: 130px;
+      background-image: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=360&h=130');
+    }
+    
+    .mobile-expand-scroller.expanded {
+      height: 430px;
+      background-image: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=360&h=430');
+    }
+    
+    .mobile-rectangle { 
+      height: 250px; 
+      background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=300&h=250');
+      background-size: contain; 
+      background-repeat: no-repeat; 
+      background-position:center; 
+    }
+    
+    .mobile-footer { 
+      height: 60px; 
+      background-image: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=360&h=60');
+    }
+    
+    .mobile-footer.expanded {
+      height: 240px;
+      background-image: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=360&h=240');
+    }
+
+    /* Video Ads */
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+      max-width: 1280px;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+    
+    .toggle-btn {
+      padding: 5px 10px;
+      background: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    
+    .shoppable-video {
+      position: relative;
+      width: 900px;
+      height: 450px;
+      margin: 0 auto;
+      background: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=900&h=450') center/cover no-repeat;
+    }
+    
+    .product-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .digital-outdoor {
+      width: 100%;
+      max-width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&h=1080') center/cover no-repeat;
+    }
+  </style>
+</head>
+<body>
+
+<h1>SOD Ad Preview - Real Images</h1>
+
+<!-- Desktop Skin -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Skin Ad (1920x250px)</div>
+  <div class="ad-skin"></div>
+</div>
+
+<!-- Desktop Expand Scroller -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Expand Scroller (900x250px / 900x450px)</div>
+  <button class="toggle-btn" onclick="toggleExpand(this)">Expand</button>
+  <div class="ad-expand-scroller"></div>
+</div>
+
+<!-- Desktop Scroller -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Scroller (900x450px)</div>
+  <div class="ad-scroller"></div>
+</div>
+
+<!-- Desktop Billboard -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Billboard (970x250px)</div>
+  <div class="ad-billboard"></div>
+</div>
+
+<!-- Desktop Halfpage -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Halfpage Ad (300x800px)</div>
+  <div class="ad-halfpage"></div>
+</div>
+
+<!-- Desktop Footer -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Footer Ad (1920x170px & 1920x485px)</div>
+  <button class="toggle-btn" onclick="toggleFooter(this)">Expand</button>
+  <div class="ad-footer">Footer Ad</div>
+</div>
+
+<!-- Desktop Gluey -->
+<div class="ad-container">
+  <div class="ad-title">Desktop Gluey Ad (1920x1080px per phase)</div>
+  <div class="ad-gluey"></div>
+</div>
+
+<!-- Mobile Ads -->
+<div class="ad-container">
+  <div class="ad-title">Mobile Ad Examples</div>
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="mobile-ad mobile-skin"></div>
+      <div class="mobile-ad mobile-scroller"></div>
+      <button class="toggle-btn" style="margin: 10px auto; display: block;" onclick="toggleMobileExpand(this)">Expand Scroller</button>
+      <div class="mobile-ad mobile-expand-scroller"></div>
+      <div class="mobile-ad mobile-rectangle"></div>
+      <button class="toggle-btn" style="margin: 10px auto; display: block;" onclick="toggleMobileFooter(this)">Expand Footer</button>
+      <div class="mobile-ad mobile-footer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Shoppable Video -->
+<div class="ad-container">
+  <div class="ad-title">Shoppable Video Ad (900x450px)</div>
+  <div class="shoppable-video">
+    <div class="product-overlay">
+      <div class="product">Product 1 - $19.99</div>
+      <div class="product">Product 2 - $24.99</div>
+    </div>
+  </div>
+</div>
+
+<!-- Multiscreen Video -->
+<div class="ad-container">
+  <div class="ad-title">Multiscreen Video (30s)</div>
+  <video controls>
+    <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <p class="note">Replace with your 1280×720px MP4 (≤5 MB, ≤30 s)</p>
+</div>
+
+<!-- Bumper Ad -->
+<div class="ad-container">
+  <div class="ad-title">Bumper Ad (6 seconds)</div>
+  <video controls poster="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1280&h=720">
+    <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <p class="note">Resolution: 1280×720px | Max size: 5MB | Duration: 6s</p>
+</div>
+
+<!-- Digital Out of Home -->
+<div class="ad-container">
+  <div class="ad-title">Digital Out of Home (1920×1080px)</div>
+  <div class="digital-outdoor"></div>
+  <p class="note">Landscape: 1920×1080px | Portrait: 1080×1920px | No audio</p>
+</div>
+
+<script>
+  function toggleExpand(btn) {
+    const container = btn.nextElementSibling;
+    container.classList.toggle('expanded');
+    btn.textContent = container.classList.contains('expanded') ? 'Collapse' : 'Expand';
+  }
+  
+  function toggleFooter(btn) {
+    const footer = btn.nextElementSibling;
+    footer.classList.toggle('expanded');
+    btn.textContent = footer.classList.contains('expanded') ? 'Collapse' : 'Expand';
+  }
+
+  function toggleMobileExpand(btn) {
+    const container = btn.nextElementSibling;
+    container.classList.toggle('expanded');
+    btn.textContent = container.classList.contains('expanded') ? 'Collapse Scroller' : 'Expand Scroller';
+  }
+
+  function toggleMobileFooter(btn) {
+    const footer = btn.nextElementSibling;
+    footer.classList.toggle('expanded');
+    btn.textContent = footer.classList.contains('expanded') ? 'Collapse Footer' : 'Expand Footer';
+  }
+</script>
+
+</body>
+</html>
